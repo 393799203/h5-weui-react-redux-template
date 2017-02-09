@@ -44,7 +44,7 @@ export default class Layout extends Component {
 
 	componentWillReceiveProps(nextProps) {
 		console.log(nextProps)
-	    this.selectActiveMenu(nextProps);
+		this.selectActiveMenu(nextProps);
 	}
 
 	selectActiveMenu = (props) => {
