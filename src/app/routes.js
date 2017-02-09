@@ -6,11 +6,13 @@ import { connect } from 'react-redux';
 /* ************* smart components regist start... ***************** */
 /* action */
 import * as layoutAction from 'actions/layout';
-import * as travelApplyAction from 'actions/travelApply'
+import * as travelApplyAction from 'actions/travelApply';
+import * as travelAuditListAction from 'actions/travelAuditList';
 
 /* components */
 import LayoutView from 'views/layout/Layout'
 import TravelApplyView from 'views/pages/apply'
+import TravelAuditListView from 'views/pages/auditList'
 
 var connectRedux = function(component, model = [], actions = null) {
   return connect(
@@ -35,6 +37,7 @@ var connectRedux = function(component, model = [], actions = null) {
 
 let Layout = connectRedux(LayoutView, ['layout'],layoutAction);
 let TravelApply = connectRedux(TravelApplyView, ['travelApply'], travelApplyAction)
+let TravelAuditList = connectRedux(TravelAuditListView, ['travelAuditList'], travelAuditListAction)
 
 /* ************* smart components regist end... ******************* */
 export default (
@@ -42,6 +45,7 @@ export default (
     <Route component={Layout}>
       <IndexRedirect to="/apply"/>
       <Route path="apply" component={ TravelApply } />
+      <Route path="audit" component={ TravelAuditList } />
       <Redirect from="*" to="/apply" />
     </Route>
   </Route>

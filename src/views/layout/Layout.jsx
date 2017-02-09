@@ -15,6 +15,7 @@ export default class Layout extends Component {
 
 	constructor(props){
 		super(props);
+		console.log(props);
 		props.actions.setNavList(this.tabBarDataListAudit);
 		this.selectActiveMenu(props);
 	}
@@ -39,6 +40,11 @@ export default class Layout extends Component {
 			}
 			return true;
 		},false);  
+	}
+
+	componentWillReceiveProps(nextProps) {
+		console.log(nextProps)
+	    this.selectActiveMenu(nextProps);
 	}
 
 	selectActiveMenu = (props) => {
