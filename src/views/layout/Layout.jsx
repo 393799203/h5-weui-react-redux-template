@@ -13,24 +13,13 @@ export default class Layout extends Component {
 		{link: "my", tabName: "我的", icon: "custom-my", key: "my"} 
 	]
 
-	state = {
-		activeArray: [],
-		tabBarDataList: [],
-		activeMenu: ""
-	}
-
 	constructor(props){
 		super(props);
-		console.log(props);
-		this.state.tabBarDataList = this.tabBarDataListAudit;
-		this.state.tabBarDataList.map((item, index)=>{
-			this.state.activeArray.push(item.key);
-		});
+		props.actions.setNavList(this.tabBarDataListAudit);
 		this.selectActiveMenu(props);
 	}
 
 	componentDidMount() {
-		this.props.actions.setApp();
 	    Util.registerNotification("reload").then(success => {
 	    	console.log("reload注册成功");
 	    }, error => {
@@ -52,24 +41,14 @@ export default class Layout extends Component {
 		},false);  
 	}
 
-	componentWillReceiveProps(nextProps) {
-		this.state.activeArray = [];
-		this.state.tabBarDataList = this.tabBarDataListAudit;
-		this.state.tabBarDataList.map((item, index)=>{
-			this.state.activeArray.push(item.key);
-		});
-	    this.selectActiveMenu(nextProps);
-	}
-
 	selectActiveMenu = (props) => {
 		let pathArr = props.location.pathname.split('/');
-		this.state.activeMenu = pathArr[pathArr.length - 1];
+		props.actions.setActiveMenu(pathArr[pathArr.length - 1]);
 	}
 
 	render() {
-		let { children } = this.props;
-		let tabBarDataList = this.state.tabBarDataList;
-		if(this.state.activeArray.includes(this.state.activeMenu) && this.state.activeArray.length > 1){
+		let { children, tabBarDataList, activeArray, activeMenu } = this.props;
+		if(activeArray.includes(activeMenu) && activeArray.length > 1){
 			return (
 				<div className="weui-tab">
 					<div className="weui-tab__panel">
@@ -77,7 +56,7 @@ export default class Layout extends Component {
 		            </div>
 		            <div className="weui-tabbar">
 		            	<For each = "item" of = { tabBarDataList } index = "index">
-			                <Link to={ Util.absoluteUrl(item.link) } className={classNames({"weui-bar__item_on":this.state.activeMenu==item.key},"weui-tabbar__item replaceHistory")} key={item.key}>
+			                <Link to={ Util.absoluteUrl(item.link) } className={classNames({"weui-bar__item_on": activeMenu==item.key},"weui-tabbar__item replaceHistory")} key={item.key}>
 			                	<Icon name={item.icon} className="weui-tabbar__icon"/>
 			                    <p className="weui-tabbar__label">{item.tabName}</p>
 			                </Link>

@@ -1,11 +1,19 @@
 import * as ActionTypes from '../constants/ActionTypes';
 
-export function setApp(appType){
-  return (dispatch,getState) => {
-    let app = appType||'mogujie';
-    return dispatch({
-      type: ActionTypes.SET_TITLE,
-      app : app
-    })
-  }
+export function setNavList(navListData){
+	return (dispatch,getState) => {
+	    return dispatch({
+	      	type: ActionTypes.SET_NAVLIST,
+	      	navListData
+	    })
+	}
+}
+
+export function setActiveMenu(activeMenu){
+	return (dispatch, getState)=>{
+		return dispatch({
+			type: ActionTypes.SET_ACTIVEMENU,
+			activeMenu
+		})
+	}
 }
