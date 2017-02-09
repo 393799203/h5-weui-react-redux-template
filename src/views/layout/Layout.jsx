@@ -21,6 +21,7 @@ export default class Layout extends Component {
 
 	constructor(props){
 		super(props);
+		console.log(props);
 		this.state.tabBarDataList = this.tabBarDataListAudit;
 		this.state.tabBarDataList.map((item, index)=>{
 			this.state.activeArray.push(item.key);
@@ -29,7 +30,7 @@ export default class Layout extends Component {
 	}
 
 	componentDidMount() {
-		this.props.actions.setApp("1111");
+		this.props.actions.setApp();
 	    Util.registerNotification("reload").then(success => {
 	    	console.log("reload注册成功");
 	    }, error => {
