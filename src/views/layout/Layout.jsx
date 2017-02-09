@@ -29,6 +29,7 @@ export default class Layout extends Component {
 	}
 
 	componentDidMount() {
+		this.props.actions.setApp("1111");
 	    Util.registerNotification("reload").then(success => {
 	    	console.log("reload注册成功");
 	    }, error => {

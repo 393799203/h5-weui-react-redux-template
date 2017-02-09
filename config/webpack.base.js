@@ -6,7 +6,7 @@ var ExtractTextPlugin = require('extract-text-webpack-plugin')
 module.exports = {
 	cache: true,
 	entry: {
-		app: ['./src/app.jsx'],
+		app: ['./src/app/index.js'],
 		vendor:['react','react-dom','react-router','flux','whatwg-fetch','es6-promise','rc-queue-anim']
 	},
 	output: {
