@@ -15,7 +15,6 @@ export default class Layout extends Component {
 
 	constructor(props){
 		super(props);
-		console.log(props);
 		props.actions.setNavList(this.tabBarDataListAudit);
 		this.selectActiveMenu(props);
 	}
@@ -49,7 +48,9 @@ export default class Layout extends Component {
 
 	selectActiveMenu = (props) => {
 		let pathArr = props.location.pathname.split('/');
-		props.actions.setActiveMenu(pathArr[pathArr.length - 1]);
+		if(pathArr[pathArr.length - 1] != props.activeMenu){
+			props.actions.setActiveMenu(pathArr[pathArr.length - 1]);
+		}
 	}
 
 	render() {
